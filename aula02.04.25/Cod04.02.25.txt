@@ -1,0 +1,72 @@
+
+
+using Microsoft.VisualBasic;
+using System.ComponentModel.Design;
+using static System.Console;
+
+
+string nome = "vinicius";
+int idade = 17;
+double salario = 20151.12;
+WriteLine($"\nSuas informações são: \nNome - {nome}; \nIdade - {idade}; \nSalario - R$ {salario}");
+
+
+
+int n1 = 0;
+WriteLine("insira um valor de 0 a 10: ");
+n1 = Convert.ToInt32(ReadLine());
+if (n1 > 10)
+{
+    WriteLine($"\nNumero Invalido!");
+    WriteLine($"\nO numero {n1} é maior do que 10");
+    return;
+}
+if (n1 < 0)
+{
+    WriteLine($"\nNumero Invalido!");
+    WriteLine($"\nO numero {n1} é menor do que 0");
+    return;
+}
+else
+{
+    WriteLine($"\nNumero valido!");
+    WriteLine($"\nO numero {n1} está dentro dos parametros!");
+}
+ReadKey();
+
+
+int numdig1 = 0, numdig2 = 0;
+char oper = 
+WriteLine("\nDigite o primeiro numero: ");
+numdig1 = Convert.ToInt32(ReadLine());
+WriteLine("\nDigite a operação que deseja ( +, -, *, /): ");
+oper = Convert.char(ReadLine());
+WriteLine("\nDigite o segundo número: ");
+numdig2 = Convert.ToInt32(ReadLine());
+if (oper = '+'); 
+
+*/
+
+
+string NomeProd = " ";
+double ValorProd = 0, ValorDesc = 0, vcd = 0;
+double rslt = 0;
+
+ForegroundColor = ConsoleColor.Yellow;
+WriteLine("Insira o Nome do Produto: ");
+NomeProd = Convert.ToString(ReadLine());
+WriteLine("Insira o Preço do Produto: ");
+ValorProd = Convert.ToDouble(ReadLine());
+WriteLine("Insira o Preço do Desconto que deseja aplicar: ");
+ValorDesc = Convert.ToDouble(ReadLine());
+vcd = ValorProd * (ValorDesc/100);
+rslt = ValorProd - vcd;
+ResetColor();
+WriteLine("====================================================================");
+ForegroundColor = ConsoleColor.Green;
+WriteLine($"\nO nome do seu produto é:{NomeProd}" +
+    $"\nO preço do seu produto é: R${ValorProd}" +
+    $"\nO desonto que deseja aplicar é de {ValorDesc}%" +
+    $"\nO valor final foi: {rslt.ToString("F")}");
+ResetColor();
+WriteLine("====================================================================");
