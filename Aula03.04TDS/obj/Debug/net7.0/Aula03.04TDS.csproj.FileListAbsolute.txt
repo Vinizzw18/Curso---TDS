@@ -1,0 +1,15 @@
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.csproj.AssemblyReference.cache
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.AssemblyInfoInputs.cache
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.AssemblyInfo.cs
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.csproj.CoreCompileInputs.cache
+C:\Users\Aluno\source\TDS\Aula03.04TDS\bin\Debug\net7.0\Aula03.04TDS.exe
+C:\Users\Aluno\source\TDS\Aula03.04TDS\bin\Debug\net7.0\Aula03.04TDS.deps.json
+C:\Users\Aluno\source\TDS\Aula03.04TDS\bin\Debug\net7.0\Aula03.04TDS.runtimeconfig.json
+C:\Users\Aluno\source\TDS\Aula03.04TDS\bin\Debug\net7.0\Aula03.04TDS.dll
+C:\Users\Aluno\source\TDS\Aula03.04TDS\bin\Debug\net7.0\Aula03.04TDS.pdb
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.dll
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\refint\Aula03.04TDS.dll
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.pdb
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\Aula03.04TDS.genruntimeconfig.cache
+C:\Users\Aluno\source\TDS\Aula03.04TDS\obj\Debug\net7.0\ref\Aula03.04TDS.dll
