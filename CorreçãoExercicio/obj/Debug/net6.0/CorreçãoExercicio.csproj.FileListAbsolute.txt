@@ -1,0 +1,15 @@
+C:\Users\Aluno\source\repos\CorreçãoExercicio\bin\Debug\net6.0\CorreçãoExercicio.exe
+C:\Users\Aluno\source\repos\CorreçãoExercicio\bin\Debug\net6.0\CorreçãoExercicio.deps.json
+C:\Users\Aluno\source\repos\CorreçãoExercicio\bin\Debug\net6.0\CorreçãoExercicio.runtimeconfig.json
+C:\Users\Aluno\source\repos\CorreçãoExercicio\bin\Debug\net6.0\CorreçãoExercicio.dll
+C:\Users\Aluno\source\repos\CorreçãoExercicio\bin\Debug\net6.0\CorreçãoExercicio.pdb
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.csproj.AssemblyReference.cache
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.AssemblyInfoInputs.cache
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.AssemblyInfo.cs
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.csproj.CoreCompileInputs.cache
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.dll
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\refint\CorreçãoExercicio.dll
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.pdb
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\CorreçãoExercicio.genruntimeconfig.cache
+C:\Users\Aluno\source\repos\CorreçãoExercicio\obj\Debug\net6.0\ref\CorreçãoExercicio.dll
