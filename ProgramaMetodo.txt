@@ -1,0 +1,220 @@
+
+using static System.Console;
+using static System.Convert;
+using static System.Environment;
+using System;
+
+namespace menu
+{
+    class MainClass
+    {
+        public static void printMenu(String[] options)
+        {
+            foreach (String option in options)
+            {
+                WriteLine(option);
+            }
+            Write("Escolha a sua opção : ");
+        }
+
+
+
+        public static void Main(string[] args)
+        {
+            WriteLine("          MENU: NOMES          ");
+            String[] options = {"1 - Cadastrar",
+                            "2 - Editar",
+                            "3 - Excluir",
+                            "4 - Gravar",
+                            "5 - Carregar",
+                            "6 - Sair"
+                                };
+
+            int option = 0;
+            while (true)
+            {
+                printMenu(options);
+                try
+                {
+                    option = ToInt32(ReadLine());
+                }
+                catch (System.FormatException)
+                {
+                    WriteLine("Por favor, digite uma opção entre 1 e " + options.Length);
+                    continue;
+                }
+                catch (Exception)
+                {
+                    WriteLine("Um erro aconteceu! Tente novamente.");
+                    continue;
+                }
+                switch (option)
+                {
+                    case 1:
+                        Cadastrar();
+                        break;
+                    case 2:
+                        Editar();
+                        break;
+                    case 3:
+                        Excluir();
+                        break;
+                    case 4:
+                        Gravar();
+                        break;
+                    case 5:
+                        Carregar();
+                        break;
+                    case 6:
+                        Exit(0);
+                        break;
+                    default:
+                        WriteLine("Por favor, digite uma opção entre 1 e  " + options.Length);
+                        break;
+                }
+
+            }
+        }
+
+        static List<string> nomes = new List<string> { };
+        private static void Cadastrar()
+        {
+            Clear();
+            WriteLine("        CADASTRAR NOME         ");
+            WriteLine("----------------------------------");
+            WriteLine("Digite um nome: ");
+            string nome = ReadLine();
+            var repetido = nomes.Any(x => x.Contains(nome));
+            if (repetido == true)
+            {
+                WriteLine("O nome digitado já consta em nossos registros!");
+                return;
+            }
+            else
+            {
+                nomes.Add(nome);
+            }
+            WriteLine("----------------------------------");
+            WriteLine("          NOMES CADASTRADOS          ");
+            WriteLine("----------------------------------");
+            foreach (var item in nomes)
+            {
+                WriteLine(item);
+            }
+        }
+
+        private static void Editar()
+        {
+            WriteLine("");
+            WriteLine("          EDITAR NOME          ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            string nome;
+            WriteLine("Digite o nome que voce deseja editar: ");
+            nome = ReadLine();
+            int index = nomes.IndexOf(nome);
+            if (index >= 0)
+            {
+                WriteLine($"\nO nome que será editado é: {nomes[index]}");
+                WriteLine("\nRedigite o nome: ");
+                string novonome = ReadLine();
+                var repetido = nomes.Any(x => x.Contains(novonome));
+                if (repetido == true)
+                {
+                    WriteLine("Este nome ja existe nos nossos registros!");
+                    return;
+                }
+                else
+                {
+                    nomes[index] = novonome;
+                }
+
+            }
+            else
+            {
+                WriteLine("O nome nao foi encontrado em nossos registros");
+                return;
+            }
+            WriteLine("");
+            WriteLine("        LISTAGEM DE NOMES          ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            foreach (var item in nomes)
+            {
+                WriteLine("\n");
+                WriteLine(item);
+            }
+        }
+
+        private static void Excluir()
+        {
+            WriteLine("");
+            WriteLine("        EXCLUSÃO DE NOMES          ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            string nome;
+            WriteLine("Digite o nome que deseja excluir: ");
+            nome = ReadLine();
+            int index = nomes.IndexOf(nome);
+            string confirma;
+            if (index >= 0)
+            {
+                WriteLine($"\nO nome excluido sera o: {nomes[index]}");
+                WriteLine("Confirmar (s/n): ");
+                confirma = ReadLine().ToLower();
+                if (confirma == "s")
+                {
+                    nomes.RemoveAt(index);
+                }
+            }
+            WriteLine("");
+            WriteLine("        LISTAGEM DE NOMES          ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            foreach (var item in nomes)
+            {
+                WriteLine("\n");
+                WriteLine(item);
+            }
+        }
+        private static void Gravar()
+        {
+            WriteLine("");
+            WriteLine("        GRAVAÇÃO DE NOMES          ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            try
+            {
+                StreamWriter dadosnomes;
+                string arq = @"C:\nomes\nomes.txt";
+                dadosnomes = File.CreateText(arq);
+                foreach (var item in nomes)
+                {
+                    dadosnomes.WriteLine($"{item}");
+                }
+                dadosnomes.Close();
+            }
+            catch (Exception e)
+            {
+                WriteLine($"{e.Message}");
+            }
+            finally
+            {
+                WriteLine("\n\n<<<<<< DADOS GRAVADOS COM SUCESSO! >>>>>>");
+            }
+        }
+        private static void Carregar()
+        {
+            Clear();
+            WriteLine("        LER NOMES         ");
+            WriteLine("----------------------------------");
+            WriteLine("");
+            var nome = File.ReadAllLines(@"C:\nomes\nomes.txt");
+            for (int i = 0; i < nome.Length; i++)
+            {
+                nomes.Add(nome[i]);
+            }
+            WriteLine("\n\n<<<<<< LEITURA REALIZADA COM SUCESSO! >>>>>>");
+        }
+    }
+}
