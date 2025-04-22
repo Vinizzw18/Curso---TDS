@@ -1,0 +1,194 @@
+using static System.Console;
+using static System.Convert;
+using static System.Environment;
+using System;
+
+namespace Mynamespace
+{
+    class SistemaEscola
+    {
+        public static void MenuInteracao(string[] opcoes)
+        {
+            foreach (string option in opcoes)
+            {
+                WriteLine(option);
+            }
+            WriteLine("Escolha sua opção: ");
+        }
+        public static void Main(string[] args)
+        {
+            WriteLine("========== MENU ESCOLAR ==========");
+            string[] opcoes = { "1 - Cadastrar turma", "2 - Adicionar Aluno", "3 - Editar Aluno", "4 - Remover Aluno", "5 - Ver Turmas", "6 - Ver Alunos", "7 - Ver Aprovados", "8 - Ver Aluno de Recuperação", "9 - Ver Reprovados", "10 - Pesquisar Aluno", "11 - Ver Dados Salvos", "12 - Salvar", "13 - Sair" };
+            int option = 0;
+            while (true)
+            {
+                MenuInteracao(opcoes);
+                try
+                {
+                    option = ToInt32(ReadLine());
+                }
+                catch (System.FormatException)
+                {
+                    WriteLine("Por favor, insira uma opção entre 1 e " + opcoes.Length);
+                }
+                catch (Exception)
+                {
+                    WriteLine("Erro! Tente novamente.");
+                }
+                switch (option)
+                {
+                    case 1:
+                        CadastrarTurma();
+                        break;
+                    case 2:
+                        AdicionarAluno();
+                        break;
+                    /*case 3:
+                        EdtAluno();
+                    case 4:
+                        RemovAluno();
+                    case 5:
+                        VerTurmas();
+                    case 6:
+                        VerAlunos();
+                    case 7:
+                        VerAprov();
+                    case 8:
+                        VerAlunosRec();
+                    case 9:
+                        VerReprov();
+                    case 10:
+                        PesqAluno();
+                    case 11:
+                        DadosSalvos();
+                    case 12:
+                        SalvarDados();*/
+                    case 13:
+                        Exit(0);
+                        break;
+                    default:
+                        WriteLine("Por favor, insira uma opção entre 1 e " + opcoes.Length);
+                        break;
+
+                }
+            }
+        }
+        static List<string> Turmas = new List<string>();
+        static List<string> Alunos = new List<string>();
+        static List<double> nota1 = new List<double>();
+        static List<double> nota2 = new List<double>();
+        static List<double> media = new List<double>();
+
+        private static void CadastrarTurma()
+        {
+            Clear();
+            WriteLine("=======================");
+            WriteLine("=== CADASTRAR TURMA ===");
+            WriteLine("=======================");
+            WriteLine("\nDigite o nome da turma: ");
+            string novaturma = ReadLine().ToUpper();
+            var repetido = Turmas.Any(x => x.Contains(novaturma));
+            if (repetido == true)
+            {
+                WriteLine("Turma já cadastrada! Tente novamente.");
+                return;
+            }
+            else
+            {
+                Turmas.Add(novaturma);
+                WriteLine("Turma Cadastrada com Sucesso!");
+            }
+            foreach (var item in Turmas)
+            {
+                WriteLine(item);
+            }
+        }
+        private static void AdicionarAluno()
+        {
+            Clear();
+            WriteLine("=======================");
+            WriteLine("=== ADICIONAR ALUNO ===");
+            WriteLine("=======================");
+            WriteLine("\nDigite o nome do aluno(a): ");
+            string novoaluno = ReadLine().ToUpper();
+            var repetido = Alunos.Any(x => x.Contains(novoaluno));
+            if (repetido == true)
+            {
+                WriteLine("Aluno já existente! Tente novamente.");
+                return;
+            }
+            else
+            {
+                Alunos.Add(novoaluno);
+            }
+            WriteLine("Turmas Existentes: ");
+            for (int j = 1; j <= Turmas.Count(); j++)
+            {
+                foreach (var item in Turmas)
+                {
+                    WriteLine($"{j} - {item}");
+                }
+            }
+            WriteLine("\nEm qual Turma o aluno(a) será registrado? R: ");
+            string TurmaAlunoReg = ReadLine().ToUpper();
+            var verifTurm = Turmas.Any(x => x.Contains(TurmaAlunoReg));
+            if (verifTurm == false)
+            {
+                WriteLine("Erro!");
+                WriteLine($"A turma {TurmaAlunoReg} não possui registros! ");
+            }
+            else
+            {
+                WriteLine($"Sucesso! Aluno adicionado a turma {TurmaAlunoReg}.");
+                string AlunoRegTurma = ReadLine().ToUpper() + "-" + TurmaAlunoReg;
+                Alunos.Add(AlunoRegTurma);
+                WriteLine($"Sucesso! Aluno adicionado a turma {TurmaAlunoReg}.");
+            }
+
+            WriteLine("Digite a 1° nota do aluno: ");
+            try
+            {
+                nota1.Add(ToDouble(ReadLine()));
+            }
+            catch(FormatException)
+            {
+                WriteLine("\nErro.");
+                WriteLine("O valor precisa ser em numeros!");
+                return;
+            }
+            catch
+            {
+                WriteLine("Erro Fatal!");
+                return;
+            }
+            WriteLine("Digite a 2° nota do aluno: ");
+            try
+            {
+                nota2.Add(ToDouble(ReadLine()));
+            }
+            catch (FormatException)
+            {
+                WriteLine("\nErro.");
+                WriteLine("O valor precisa ser em numeros!");
+                return;
+            }
+            catch
+            {
+                WriteLine("Erro Fatal!");
+                return;
+            }
+            int i = Alunos.Count - 1;
+            double MedNotas = (nota1[i] + nota2[i]) / 2;
+            media.Add(MedNotas);
+        }
+        private static void EditarAluno()
+        {
+            Clear();
+            WriteLine("=======================");
+            WriteLine("=== EDITAR ALUNO ===");
+            WriteLine("=======================");
+            WriteLine("\nDigite o nome do aluno(a) que deseja editar: ");
+            string novonome = ReadLine().ToUpper();
+        }
+    }
+}
