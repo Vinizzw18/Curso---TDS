@@ -1,0 +1,312 @@
+using static System.Console;
+using static System.Convert;
+using static System.Environment;
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Mynamespace
+{
+    class SistemaEscola
+    {
+        public static void MenuInteracao(string[] opcoes)
+        {
+            foreach (string option in opcoes)
+            {
+                WriteLine(option);
+            }
+            WriteLine("Escolha sua opção: ");
+        }
+        public static void Main(string[] args)
+        {
+            WriteLine("========== MENU ESCOLAR ==========");
+            string[] opcoes = { "1 - Cadastrar turma", "2 - Adicionar Aluno", "3 - Editar Aluno", "4 - Remover Aluno", "5 - Ver Turmas", "6 - Ver Alunos", "7 - Ver Aprovados", "8 - Ver Aluno de Recuperação", "9 - Ver Reprovados", "10 - Pesquisar Aluno", "11 - Ver Dados Salvos", "12 - Salvar", "13 - Sair" };
+            int option = 0;
+            while (true)
+            {
+                MenuInteracao(opcoes);
+                try
+                {
+                    option = ToInt32(ReadLine());
+                }
+                catch (System.FormatException)
+                {
+                    WriteLine("Por favor, insira uma opção entre 1 e " + opcoes.Length);
+                }
+                catch (Exception)
+                {
+                    WriteLine("Erro! Tente novamente.");
+                }
+                switch (option)
+                {
+                    case 1:
+                        CadastrarTurma();
+                        break;
+                    case 2:
+                        AdicionarAluno();
+                        break;
+                    case 3:
+                        EditarAluno();
+                        break;
+                    case 4:
+                        RemoverAluno();
+                        break;
+                    case 5:
+                        VerTurmas();
+                        break;
+                    /*case 6:
+                        VerAlunos();
+                    case 7:
+                        VerAprov();
+                    case 8:
+                        VerAlunosRec();
+                    case 9:
+                        VerReprov();
+                    case 10:
+                        PesqAluno();
+                    case 11:
+                        DadosSalvos();
+                    case 12:
+                        SalvarDados();*/
+                    case 13:
+                        Exit(0);
+                        break;
+                    default:
+                        WriteLine("Por favor, insira uma opção entre 1 e " + opcoes.Length);
+                        break;
+
+                }
+            }
+        }
+        static List<string> TurmasDosAlunos = new List<string>();
+        static List<string> Turmas = new List<string>();
+        static List<string> Alunos = new List<string>();
+        static List<double> nota1 = new List<double>();
+        static List<double> nota2 = new List<double>();
+        static List<double> media = new List<double>();
+
+        private static void CadastrarTurma()
+        {
+            Clear();
+            WriteLine("=======================");
+            WriteLine("=== CADASTRAR TURMA ===");
+            WriteLine("=======================");
+            WriteLine("\nDigite o nome da turma: ");
+            string novaturma = ReadLine().ToUpper();
+            var repetido = Turmas.Any(x => x.Contains(novaturma));
+            if (repetido == true)
+            {
+                WriteLine("Turma já cadastrada! Tente novamente.");
+                return;
+            }
+            else
+            {
+                Turmas.Add(novaturma);
+                WriteLine("Turma Cadastrada com Sucesso!");
+            }
+            foreach (var item in Turmas)
+            {
+                WriteLine(item);
+            }
+        }
+        private static void AdicionarAluno()
+        {
+            Clear();
+            WriteLine("=======================");
+            WriteLine("=== ADICIONAR ALUNO ===");
+            WriteLine("=======================");
+            WriteLine("\nDigite o nome do aluno(a): ");
+            string novoaluno1 = ReadLine().ToUpper();
+            var repetido1 = Alunos.Any(x => x.Contains(novoaluno1));
+            if (repetido1 == true)
+            {
+                WriteLine("Aluno já existente! Tente novamente.");
+                return;
+            }
+            else
+            {
+                Alunos.Add(novoaluno1);
+            }
+            WriteLine("Turmas Existentes: ");
+            for (int j = 1; j <= Turmas.Count(); j++)
+            {
+                foreach (var item in Turmas)
+                {
+                    WriteLine($"{j} - {item}");
+                }
+            }
+            WriteLine("\nEm qual Turma o aluno(a) será registrado? R: ");
+            string TurmaAlunoReg = ReadLine().ToUpper();
+            var verifTurm = Turmas.Any(x => x.Contains(TurmaAlunoReg));
+            if (verifTurm == false)
+            {
+                WriteLine("Erro!");
+                WriteLine($"A turma {TurmaAlunoReg} não possui registros! ");
+                return;
+            }
+            else
+            {
+                WriteLine($"Sucesso! Aluno adicionado a turma {TurmaAlunoReg}.");
+                string AlunoRegTurma = ReadLine().ToUpper() + "-" + TurmaAlunoReg;
+                Alunos.Add(AlunoRegTurma);
+            }
+
+            WriteLine("Digite a 1° nota do aluno: ");
+            try
+            {
+                nota1.Add(ToDouble(ReadLine()));
+            }
+            catch (FormatException)
+            {
+                WriteLine("\nErro.");
+                WriteLine("O valor precisa ser em numeros!");
+                return;
+            }
+            catch
+            {
+                WriteLine("Erro Fatal!");
+                return;
+            }
+            WriteLine("Digite a 2° nota do aluno: ");
+            try
+            {
+                nota2.Add(ToDouble(ReadLine()));
+            }
+            catch (FormatException)
+            {
+                WriteLine("\nErro.");
+                WriteLine("O valor precisa ser em numeros!");
+                return;
+            }
+            catch
+            {
+                WriteLine("Erro Fatal!");
+                return;
+            }
+            int i = Alunos.Count - 2;
+            double v = (nota1[i] + nota2[i]) / 2;
+            double MedNotas = v;
+            media.Add(MedNotas);
+        }
+        private static void EditarAluno()
+        {
+            Clear();
+            WriteLine("========================");
+            WriteLine("===== EDITAR ALUNO =====");
+            WriteLine("========================");
+            WriteLine("\nDigite o nome do aluno(a) que deseja editar: ");
+            string nome = ReadLine().ToUpper();
+            int IdentAluno = Alunos.IndexOf(nome);
+            if (IdentAluno >= 0)
+            {
+                Clear();
+                WriteLine("==========================");
+                WriteLine("= ALUNO A SER MODIFICADO =");
+                WriteLine("==========================");
+                WriteLine($"\nAluno que será editado: {Alunos[IdentAluno]}");
+                WriteLine($"Notas: {nota1[IdentAluno]} | {nota2[IdentAluno]}");
+                WriteLine("\nInsira o novo nome: ");
+                string novonome = ReadLine().ToUpper();
+                var repetido = Alunos.Any(x => x.Contains(novonome));
+                if (repetido == true)
+                {
+                    WriteLine($"Erro! O nome {novonome} já possui registros no sistema!");
+                }
+                else
+                {
+                    WriteLine("===== Sucesso! Nome editado no sistema. =====");
+                    Alunos[IdentAluno] = novonome;
+                }
+                WriteLine($"\nDeseja editar as notas do aluno? ");
+                WriteLine("OPÇÃO:\n1 - Sim\n2 - Não");
+                WriteLine("\nR:");
+                int escolha = ToInt32(ReadLine());
+                int Index = Alunos.IndexOf(novonome);
+                if (escolha == 1)
+                {
+                    WriteLine("\nInsira a nova 1° nota do aluno: ");
+                    double novanota1 = ToDouble(ReadLine());
+                    nota1[Index] = novanota1;
+                    WriteLine($"Sucesso! A 1° nota foi modificada para {novanota1}");
+                    WriteLine("\nInsira a nova 2° nota do aluno: ");
+                    double novanota2 = ToDouble(ReadLine());
+                    nota2[Index] = novanota2;
+                    WriteLine($"Sucesso! A 2° nota foi modificada para {novanota2}");
+                    WriteLine($"Notas(Atualizadas): {nota1[Index]} | {nota2[Index]}");
+                    return;
+                }
+                else if (escolha == 2)
+                {
+                    WriteLine("Apenas edição do nome foi realizada!");
+                    WriteLine();
+                    WriteLine($"Nome Atualizado: {Alunos[IdentAluno]}");
+                    return;
+                }
+                else
+                {
+                    WriteLine("Escolha Inválida! Apenas opção 1 e 2.");
+                    return;
+                }
+            }
+            else
+            {
+                WriteLine("Aluno não foi encontrado! Adicione-o ao sistema (Opção 2 no Menu).");
+                return;
+            }
+        }
+        private static void RemoverAluno()
+        {
+            Clear();
+            WriteLine("========================");
+            WriteLine("=== REMOÇÃO DE ALUNO ===");
+            WriteLine("========================");
+            WriteLine("\nDigite o nome do aluno(a) que deseja REMOVER: ");
+            string nomeAlunoRemov = ReadLine().ToUpper();
+            int identAluno = Alunos.IndexOf(nomeAlunoRemov);
+            if (identAluno >= 0)
+            {
+                WriteLine("\nAluno Encontrado! Deseja remove-lo? ");
+                WriteLine($"Informações do Aluno: {Alunos[identAluno]} - Notas: {nota1[identAluno]} | {nota2[identAluno]}");
+                WriteLine("\nOpcões: ");
+                WriteLine("Insira 1 para: Sim");
+                WriteLine("Insira 2 para: Não\n");
+                int escolha = ToInt32(ReadLine());
+                if (escolha == 1)
+                {
+                    Alunos.RemoveAt(identAluno);
+                    WriteLine($"Aluno Removido com sucesso!");
+                    return;
+                }
+                else if (escolha == 2)
+                {
+                    WriteLine("\nOperção cancelada!");
+                    WriteLine("---- Se deseja remover algum aluno, digite novamente a opção 4 do Menu! ----");
+                    return;
+                }
+                else
+                {
+                    WriteLine("Erro! Opção inválida!");
+                }
+            }
+            else
+            {
+                WriteLine("Aluno não foi encontrado! Adicione-o ao sistema (Opção 2 no Menu).");
+                return;
+            }
+        }
+        private static void VerTurmas()
+        {
+            Clear();
+            WriteLine("=========================");
+            WriteLine("==== TODAS AS TURMAS ====");
+            WriteLine("=========================");
+            int i = 0;
+            foreach (string item in Turmas) 
+            {
+                
+                WriteLine($"\n{i + 1} - {item}");
+                i++;
+            }
+
+        }
+    }
+}
